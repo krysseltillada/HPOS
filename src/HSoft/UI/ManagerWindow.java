@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package HSoft.UI;
 
-import HSoft.User.*;
 import java.awt.CardLayout;
 
 import java.awt.Color;
@@ -21,21 +15,12 @@ import java.util.Date;
 import javax.swing.Timer;
 import java.text.SimpleDateFormat;
 import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
-/**
- *
- * @author Gina
- */
 public class ManagerWindow extends javax.swing.JFrame {
     Timer timer;
     Date currentTime;
@@ -51,14 +36,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     SettingsPanel settingsPanel;
     LogPanel logPanel;
    
-    /**
-     * Creates new form ManagerWindow
-     */
-    
-    
     public ManagerWindow() {
-     
-        
         initComponents();
         init ();
     }
@@ -68,23 +46,19 @@ public class ManagerWindow extends javax.swing.JFrame {
         
         ImageIcon posIcon = new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\posIcon.png");
         
-        this.setIconImage(posIcon.getImage());
+        setIconImage(posIcon.getImage());
            
         cardPanel.setLayout(new CardLayout ( ));
-        
-     
         
         updateAccountInformation ();
         updateShopInformation ();
         startTime ();
-        
-               
+           
         homePanel = new HomePanel ();
         inventoryPanel = new InventoryPanel ();
         managePanel = new ManagePanel();
         settingsPanel = new SettingsPanel();
         logPanel = new LogPanel();
-        
         
         cardPanel.add(homePanel, "homePanel");
         cardPanel.add(inventoryPanel, "inventoryPanel");
@@ -107,16 +81,12 @@ public class ManagerWindow extends javax.swing.JFrame {
         
         popupMenu.add(miLogOut);
         popupMenu.add(miExit);
-        
     }
     
      private void updateShopInformation () {
         Connection conn = null;
         Statement sqlStatement = null;
         ResultSet sqlResult = null;
-        
-        
-        System.out.println ("shop update");
         
         try {
             conn = DriverManager.getConnection ("jdbc:derby://localhost:1527/Kryssel");
@@ -125,7 +95,6 @@ public class ManagerWindow extends javax.swing.JFrame {
             
             for (; sqlResult.next() ;) {
                 
-                System.out.println ("run");
                 Blob imageBlob = null;
                 ImageIcon image = null;
                 
@@ -138,10 +107,8 @@ public class ManagerWindow extends javax.swing.JFrame {
                    
                 imageBlob = sqlResult.getBlob("SHOPIMAGE");
               
-                
                 try {
                     if (imageBlob != null) {
-                        System.out.println ("Wgfwgfw");
                     ObjectInputStream oos = new ObjectInputStream (imageBlob.getBinaryStream());
                     try {
                         image = (ImageIcon) oos.readObject();
@@ -150,12 +117,8 @@ public class ManagerWindow extends javax.swing.JFrame {
                         Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
-                    } else {
-                        System.out.println ("hititt");
-                        
-                        
+                    } else { 
                         image = new ImageIcon ("C:\\Users\\Gina\\Downloads\\cwcw.jpg");
-                       
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,19 +128,28 @@ public class ManagerWindow extends javax.swing.JFrame {
              
             }
        
-            
         } catch (SQLException ex) {
             Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null)
+                    conn.close ();
+                
+                if (sqlStatement != null)
+                    sqlStatement.close ();
+                
+                if (sqlResult != null)
+                    sqlResult.close ();
+            } catch (SQLException ex) {
+                Logger.getLogger(ManagerWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-    
     
     private void updateAccountInformation () {
         Connection conn = null;
         Statement sqlStatement = null;
         ResultSet sqlResult = null;
-        
         
         try {
             conn = DriverManager.getConnection("jdbc:derby://localhost:1527/Kryssel");
@@ -185,18 +157,9 @@ public class ManagerWindow extends javax.swing.JFrame {
             sqlResult = sqlStatement.executeQuery("SELECT FIRSTNAME, LASTNAME, EMAIL, ADDRESS, USERIMAGE FROM TBL" + LoginUI.currentTypeUser + " WHERE USERNAME = '" + LoginUI.currentUser + "'");
             
             for (; sqlResult.next () ;) {
-                System.out.println (sqlResult.getString ("FIRSTNAME"));
                 
                 lblAccountFullName.setText(sqlResult.getString("FIRSTNAME") + " " + sqlResult.getString("LASTNAME"));
-                
-                System.out.println (sqlResult.getString ("LASTNAME"));
-                System.out.println (sqlResult.getString ("EMAIL")); 
-                
                 lblAccountEmail.setText(sqlResult.getString("EMAIL"));
-                
-                
-                System.out.println (sqlResult.getString ("ADDRESS"));
-                
                 lblAccountAddress.setText(sqlResult.getString("ADDRESS"));
                 
                 ImageIcon image = null;
@@ -214,8 +177,7 @@ public class ManagerWindow extends javax.swing.JFrame {
                             }
                             else {
                                 File getFileLocation = new File("C:\\Users\\Gina\\Downloads\\heavybreathing.jpg");
-                                
-                                //image = new ImageIcon("C:\\Users\\Gina\\Downloads\\heavybreathing.jpg");
+                               
                                 image = new ImageIcon(new ImageIcon(getFileLocation.getAbsolutePath()).getImage().getScaledInstance(btnPopupButton.getWidth(), btnPopupButton.getHeight(), Image.SCALE_DEFAULT));
                             }
                            
@@ -223,12 +185,8 @@ public class ManagerWindow extends javax.swing.JFrame {
                             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
-                       
-                        btnPopupButton.setIcon(image);
-                        
+                        btnPopupButton.setIcon(image);       
             }
-            
-            
             
         } catch (SQLException ex) {
             Logger.getLogger(ManagerWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -247,9 +205,7 @@ public class ManagerWindow extends javax.swing.JFrame {
             }
         }
         
-      
     }
-    
     
     private void startTime () {
         timer = new Timer (1000, new ActionListener () {
@@ -275,11 +231,6 @@ public class ManagerWindow extends javax.swing.JFrame {
         t.start();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -621,7 +572,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout)(cardPanel.getLayout());
         getLayout.show(cardPanel, "managePanel");
         
@@ -629,7 +580,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnManageActionPerformed
 
     private void btnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventoryActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout)(this.cardPanel.getLayout());
         getLayout.show(cardPanel, "inventoryPanel");
         
@@ -640,7 +591,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInventoryActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout) (cardPanel.getLayout());
         getLayout.show(cardPanel, "homePanel");
         
@@ -648,7 +599,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogsActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout) (cardPanel.getLayout());
         getLayout.show(cardPanel, "logPanel");
 
@@ -656,7 +607,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogsActionPerformed
 
     private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout) (cardPanel.getLayout());
         getLayout.show(cardPanel, "settingsPanel");
 
@@ -664,15 +615,13 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSettingsActionPerformed
 
     private void btnPopupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPopupButtonActionPerformed
-        // TODO add your handling code here:
+
         popupMenu.show(btnPopupButton, btnPopupButton.getX(), btnPopupButton.getY() + btnPopupButton.getHeight() - 4);
         
     }//GEN-LAST:event_btnPopupButtonActionPerformed
 
     private void miExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExitActionPerformed
-        // TODO add your handling code here:
-        
-        
+       
         int state = JOptionPane.showConfirmDialog(this, "are you sure you want to exit?", "exit", JOptionPane.YES_NO_OPTION);
         
         if (state == 0) {
@@ -685,7 +634,7 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miExitActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+
         int state = JOptionPane.showConfirmDialog(this, "are you sure you want to exit?", "exit", JOptionPane.YES_NO_OPTION);
         
         if (state == 0) {
@@ -698,57 +647,57 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonFocused.png"));
     }//GEN-LAST:event_btnHomeMouseEntered
 
     private void btnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseExited
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonNormal.png"));
     }//GEN-LAST:event_btnHomeMouseExited
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonPressed.png"));
     }//GEN-LAST:event_btnHomeMousePressed
 
     private void btnInventoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventoryMouseEntered
-        // TODO add your handling code here:
+
         btnInventory.setIcon(new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\InventoryFocused.png"));
     }//GEN-LAST:event_btnInventoryMouseEntered
 
     private void btnInventoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventoryMouseExited
-        // TODO add your handling code here:
+
         btnInventory.setIcon(new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\InventoryNormal.png"));
     }//GEN-LAST:event_btnInventoryMouseExited
 
     private void btnInventoryMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInventoryMousePressed
-        // TODO add your handling code here:
+
         btnInventory.setIcon(new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\InventoryPressed.png"));
     }//GEN-LAST:event_btnInventoryMousePressed
 
     private void btnManageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManageMouseEntered
-        // TODO add your handling code here:
+
         btnManage.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\ManageFocused.png"));
     }//GEN-LAST:event_btnManageMouseEntered
 
     private void btnManageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManageMouseExited
-        // TODO add your handling code here:
+
          btnManage.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\ManageNormal.png"));
     }//GEN-LAST:event_btnManageMouseExited
 
     private void btnManageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManageMousePressed
-        // TODO add your handling code here:
+
          btnManage.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\ManagePressed.png"));
     }//GEN-LAST:event_btnManageMousePressed
 
     private void btnSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingsMouseEntered
-        // TODO add your handling code here:
+
         btnSettings.setIcon(new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\SettingsFocused.png"));
     }//GEN-LAST:event_btnSettingsMouseEntered
 
     private void btnSettingsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingsMouseExited
-        // TODO add your handling code here:
+
         btnSettings.setIcon(new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\SettingsNormal.png"));
     }//GEN-LAST:event_btnSettingsMouseExited
 
@@ -757,22 +706,22 @@ public class ManagerWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSettingsMousePressed
 
     private void btnLogsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogsMouseEntered
-        // TODO add your handling code here:
+
         btnLogs.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\LogsFocused.png"));
     }//GEN-LAST:event_btnLogsMouseEntered
 
     private void btnLogsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogsMouseExited
-        // TODO add your handling code here:
+
         btnLogs.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\LogsNormal.png"));
     }//GEN-LAST:event_btnLogsMouseExited
 
     private void btnLogsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogsMousePressed
-        // TODO add your handling code here:
+
         btnLogs.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\LogsPressed.png"));
     }//GEN-LAST:event_btnLogsMousePressed
 
     private void miLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogOutActionPerformed
-        // TODO add your handling code here:
+
         setVisible(false);
         dispose ();
         
@@ -784,11 +733,9 @@ public class ManagerWindow extends javax.swing.JFrame {
         Login.setVisible(true);
     }//GEN-LAST:event_miLogOutActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -811,7 +758,6 @@ public class ManagerWindow extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ManagerWindow().setVisible(true);
