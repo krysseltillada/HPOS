@@ -45,7 +45,6 @@ public class CreateUI extends javax.swing.JFrame {
     public CreateUI() {
         setUndecorated(true);
         
-        
         initComponents();
         
         imageDialog.setUndecorated(true);
@@ -966,22 +965,22 @@ public class CreateUI extends javax.swing.JFrame {
 
     private void btnSaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseEntered
         // TODO add your handling code here:
-        this.btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SaveFocused.png"));
+        btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SaveFocused.png"));
     }//GEN-LAST:event_btnSaveMouseEntered
 
     private void btnSaveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseExited
         // TODO add your handling code here:
-        this.btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SaveNormal.png"));
+        btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SaveNormal.png"));
     }//GEN-LAST:event_btnSaveMouseExited
 
     private void btnSaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMousePressed
         // TODO add your handling code here:
-          this.btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SavePressed.png"));
+        btnSave.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\SavePressed.png"));
     }//GEN-LAST:event_btnSaveMousePressed
 
     private void btnCancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseEntered
         // TODO add your handling code here:
-        this.btnCancel.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\ICancelFocused.png"));
+        btnCancel.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\buttons\\ICancelFocused.png"));
     }//GEN-LAST:event_btnCancelMouseEntered
 
     private void btnBrowseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBrowseMouseEntered
@@ -1011,43 +1010,43 @@ public class CreateUI extends javax.swing.JFrame {
 
     private void btnMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizeActionPerformed
         // TODO add your handling code here:
-        this.setState (JFrame.ICONIFIED);
+        setState (JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizeActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
-        this.setVisible (false);
-        this.dispose ();
+        setVisible (false);
+        dispose ();
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
         // TODO add your handling code here:
-        this.btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconFocused.png"));
+        btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconFocused.png"));
     }//GEN-LAST:event_btnCloseMouseEntered
 
     private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
         // TODO add your handling code here:
-        this.btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconNormal.png"));
+        btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconNormal.png"));
     }//GEN-LAST:event_btnCloseMouseExited
 
     private void btnCloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMousePressed
         // TODO add your handling code here:
-        this.btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconPressed.png"));
+        btnClose.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\CloseIconPressed.png"));
     }//GEN-LAST:event_btnCloseMousePressed
 
     private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
         // TODO add your handling code here:
-        this.btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconFocused.png"));
+        btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconFocused.png"));
     }//GEN-LAST:event_btnMinimizeMouseEntered
 
     private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
         // TODO add your handling code here:
-        this.btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconNormal.png"));
+        btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconNormal.png"));
     }//GEN-LAST:event_btnMinimizeMouseExited
 
     private void btnMinimizeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMousePressed
         // TODO add your handling code here:
-        this.btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconPressed.png"));
+        btnMinimize.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\RemoveIconPressed.png"));
     }//GEN-LAST:event_btnMinimizeMousePressed
 
     private void btnClose2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose2ActionPerformed
