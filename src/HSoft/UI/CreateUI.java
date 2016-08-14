@@ -59,6 +59,10 @@ public class CreateUI extends javax.swing.JFrame {
         
         Font roboto = new Font ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\fonts\\roboto\\Roboto-Regular.ttf", Font.PLAIN, 11);
         
+       wdwdwd
+               wdwdw
+               wdwdw
+                       wdw
         
         lblUploadMessage.setFont (roboto);
         
