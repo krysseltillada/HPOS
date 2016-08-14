@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /// added a line
+/// added a second line
 
 /**
  *
@@ -68,7 +69,7 @@ public class CreateUI extends javax.swing.JFrame {
        
         setLocationRelativeTo(null);
         
-        this.getContentPane().setBackground(new Color(35, 35, 35) );
+        getContentPane().setBackground(new Color(35, 35, 35) );
         
         bgGender.add(rbMale);
         bgGender.add(rbFemale);       
