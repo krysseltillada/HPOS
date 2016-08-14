@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package HSoft.UI;
 
 import HSoft.User.*;
@@ -36,11 +31,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.ColorUIResource;
 
-
-/**
- *
- * @author Gina
- */
 public class LoginUI extends javax.swing.JFrame {
     
     Point MouseCoordinates;
@@ -953,9 +943,7 @@ public class LoginUI extends javax.swing.JFrame {
             
             String strPassword = "";
             String table = cbUser.getSelectedItem().toString().toUpperCase();
-            
-            System.out.println ("table: " + table);
-            
+           
             strPassword = insertString (strPassword, pwdPassword.getPassword());
             
             if (table.equals("MANAGER")) {
@@ -1006,7 +994,7 @@ public class LoginUI extends javax.swing.JFrame {
                 }
             }
             else {
-                     sqlResult = sqlCommand.executeQuery("SELECT username, password, hired FROM TBL" + table + " WHERE username = '" + txtfUsername.getText() + "' OR password = '" + strPassword + "'");   
+                    sqlResult = sqlCommand.executeQuery("SELECT username, password, hired FROM TBL" + table + " WHERE username = '" + txtfUsername.getText() + "' OR password = '" + strPassword + "'");   
             }
             
             Account dbManager = new Account ();
@@ -1018,9 +1006,7 @@ public class LoginUI extends javax.swing.JFrame {
             if (sqlResult.isBeforeFirst()) {
           
             for (;sqlResult.next();) {
-                
-                System.out.println ("running");
-                
+              
                  dbManager.username = sqlResult.getString("username");
                  dbManager.password = sqlResult.getString("password"); 
                  
@@ -1056,9 +1042,7 @@ public class LoginUI extends javax.swing.JFrame {
                        } else {
                            
                            if (dbManager.hired) {
-                           
-                           System.out.println ("opening employee ");
-                               
+                            
                            currentUser = valManager.username;
                            currentTypeUser = cbUser.getSelectedItem().toString().toUpperCase();
                             
@@ -1175,8 +1159,6 @@ public class LoginUI extends javax.swing.JFrame {
         Session session = Session.getInstance(props,null);
         MimeMessage message = new MimeMessage(session);
 
-        System.out.println("Port: "+session.getProperty("mail.smtp.port"));
-
           try {
             
               InternetAddress from = new InternetAddress(From.email);
@@ -1207,8 +1189,6 @@ public class LoginUI extends javax.swing.JFrame {
               
               transport.connect("smtp.gmail.com", From.username, From.password);
               
-              System.out.println("Transport: "+transport.toString());
-              
               transport.sendMessage(message, message.getAllRecipients());
 
          } catch (AddressException e) {
@@ -1216,7 +1196,6 @@ public class LoginUI extends javax.swing.JFrame {
          } catch (MessagingException e) {
              return false;
             }
-          
           return true;
     }
     
@@ -1293,15 +1272,12 @@ public class LoginUI extends javax.swing.JFrame {
                 emailSender.email = "krysseltillada@gmail.com"; 
                 emailSender.password = "kryssel2821";
                 
-                
-                
                 if (this.sendGmailMessage(emailSender, getAccount.email, "Password Retrieval", message)) {
                 
                 dgForgotPassword.dispose();
         
                 lblEmail.setText("at " + getAccount.email);
                 
-                  
                 dgForgotPassword2.setLocationRelativeTo(null);
                 dgForgotPassword2.pack();
                 dgForgotPassword2.setVisible(true);
@@ -1368,7 +1344,6 @@ public class LoginUI extends javax.swing.JFrame {
                     
                     sqlResult = sqlStatement2.executeQuery("SELECT password FROM TBL" + strUserType + " WHERE username = '" + txtfUsername2.getText() + "'");
                     
-                
                     String getpassword = "";
                     
                     for (;sqlResult.next();)
@@ -1408,7 +1383,6 @@ public class LoginUI extends javax.swing.JFrame {
                             Logger.getLogger(LoginUI.class.getName()).log(Level.SEVERE, null, ex);
                         }
                 }
-                
                 
             } else {
                 JOptionPane.showMessageDialog(this, "please enter your new password", "resetting password", JOptionPane.ERROR_MESSAGE);
@@ -1891,8 +1865,6 @@ public class LoginUI extends javax.swing.JFrame {
           
             for (;sqlResult.next();) {
                 
-                System.out.println ("running");
-                
                  dbManager.username = sqlResult.getString("username");
                  dbManager.password = sqlResult.getString("password"); 
                  
@@ -1959,7 +1931,6 @@ public class LoginUI extends javax.swing.JFrame {
                     lblMessage.setText("enter your username");
                 else
                     lblMessage.setText("username and password wrong");
-          
             }
            
         } catch (SQLException ex) {
