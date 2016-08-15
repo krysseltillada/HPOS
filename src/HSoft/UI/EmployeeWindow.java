@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package HSoft.UI;
 
-import HSoft.User.*;
 import java.awt.CardLayout;
 
 import java.awt.Color;
@@ -26,10 +20,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Gina
- */
 public class EmployeeWindow extends javax.swing.JFrame {
     Timer timer;
     Date currentTime;
@@ -40,11 +30,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
     HomePanel homePanel;
     SettingsPanelEmployee settingsPanel;
   
-    /**
-     * Creates new form ManagerWindow
-     */
-    
-    
     public EmployeeWindow() {
         initComponents();
         init ();
@@ -58,14 +43,12 @@ public class EmployeeWindow extends javax.swing.JFrame {
         
         setIconImage (posIcon.getImage());
         
-        
         cardPanel.setLayout(new CardLayout ( ));
         
         updateAccountInformation ();
         updateShopInformation ();
         startTime ();
-        
-               
+            
         homePanel = new HomePanel ();
       
         settingsPanel = new SettingsPanelEmployee();
@@ -82,7 +65,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
         miExit.setBorder (BorderFactory.createLineBorder (new Color (35, 35, 35), 1));
         miExit.setForeground (new Color (235, 235, 235));
         
-        
         popupMenu.setPreferredSize(new Dimension (btnPopupButton.getWidth() , 80));
         
         popupMenu.add(miLogOut);
@@ -90,7 +72,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
         
         cardPanel.add(homePanel, "homePanel");
         cardPanel.add(settingsPanel, "settingsPanel");
-  
     }
     
      private void updateShopInformation () {
@@ -98,16 +79,13 @@ public class EmployeeWindow extends javax.swing.JFrame {
         Statement sqlStatement = null;
         ResultSet sqlResult = null;
         
-        System.out.println ("shop update");
-        
         try {
             conn = DriverManager.getConnection ("jdbc:derby://localhost:1527/Kryssel");
             sqlStatement = conn.createStatement();
             sqlResult = sqlStatement.executeQuery("SELECT NAME, DESCRIPTION, ADDRESS, SHOPIMAGE, SHOPIMAGELOCATION, TIMEFORMAT, DATEFORMAT FROM TBLSHOP");
             
             for (; sqlResult.next() ;) {
-                
-                System.out.println ("run");
+
                 Blob imageBlob = null;
                 ImageIcon image = null;
                 
@@ -119,11 +97,9 @@ public class EmployeeWindow extends javax.swing.JFrame {
                 dateFormat = sqlResult.getString("DATEFORMAT");
                    
                 imageBlob = sqlResult.getBlob("SHOPIMAGE");
-              
                 
                 try {
                     if (imageBlob != null) {
-                        System.out.println ("Wgfwgfw");
                     ObjectInputStream oos = new ObjectInputStream (imageBlob.getBinaryStream());
                     try {
                         image = (ImageIcon) oos.readObject();
@@ -133,11 +109,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
                     }
                     
                     } else {
-                        System.out.println ("hititt");
-                        
-                        
                         image = new ImageIcon ("C:\\Users\\Gina\\Downloads\\cwcw.jpg");
-                       
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,7 +119,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
              
             }
        
-            
         } catch (SQLException ex) {
             Logger.getLogger(SettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,18 +138,9 @@ public class EmployeeWindow extends javax.swing.JFrame {
             sqlResult = sqlStatement.executeQuery("SELECT FIRSTNAME, LASTNAME, EMAIL, ADDRESS, USERIMAGE FROM TBL" + LoginUI.currentTypeUser + " WHERE USERNAME = '" + LoginUI.currentUser + "'");
             
             for (; sqlResult.next () ;) {
-                System.out.println (sqlResult.getString ("FIRSTNAME"));
-                
+               
                 lblAccountFullName.setText(sqlResult.getString("FIRSTNAME") + " " + sqlResult.getString("LASTNAME"));
-                
-                System.out.println (sqlResult.getString ("LASTNAME"));
-                System.out.println (sqlResult.getString ("EMAIL")); 
-                
                 lblAccountEmail.setText(sqlResult.getString("EMAIL"));
-                
-                
-                System.out.println (sqlResult.getString ("ADDRESS"));
-                
                 lblAccountAddress.setText(sqlResult.getString("ADDRESS"));
                 
                 ImageIcon image = null;
@@ -196,8 +158,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
                             }
                             else {
                                 File getFileLocation = new File("C:\\Users\\Gina\\Downloads\\heavybreathing.jpg");
-                                
-                                //image = new ImageIcon("C:\\Users\\Gina\\Downloads\\heavybreathing.jpg");
+                              
                                 image = new ImageIcon(new ImageIcon(getFileLocation.getAbsolutePath()).getImage().getScaledInstance(btnPopupButton.getWidth(), btnPopupButton.getHeight(), Image.SCALE_DEFAULT));
                             }
                            
@@ -205,12 +166,9 @@ public class EmployeeWindow extends javax.swing.JFrame {
                             Logger.getLogger(HomePanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         
-                        btnPopupButton.setIcon(image);
-                        
+                        btnPopupButton.setIcon(image);        
             }
-            
-            
-            
+           
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeWindow.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -227,8 +185,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
                 Logger.getLogger(EmployeeWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-      
     }
     
     
@@ -256,11 +212,6 @@ public class EmployeeWindow extends javax.swing.JFrame {
         t.start();
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -515,7 +466,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout) (cardPanel.getLayout());
         getLayout.show(cardPanel, "homePanel");
         
@@ -523,7 +474,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
-        // TODO add your handling code here:
+
         CardLayout getLayout = (CardLayout) (cardPanel.getLayout());
         getLayout.show(cardPanel, "settingsPanel");
 
@@ -531,12 +482,12 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSettingsActionPerformed
 
     private void btnPopupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPopupButtonActionPerformed
-        // TODO add your handling code here:
+
         popupMenu.show(btnPopupButton, btnPopupButton.getX(), btnPopupButton.getY() + btnPopupButton.getHeight() - 4);
     }//GEN-LAST:event_btnPopupButtonActionPerformed
 
     private void miLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogOutActionPerformed
-        // TODO add your handling code here:
+
         setVisible(false);
         dispose ();
         
@@ -549,7 +500,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miLogOutActionPerformed
 
     private void miExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExitActionPerformed
-        // TODO add your handling code here:
+
         int state = JOptionPane.showConfirmDialog(this, "are you sure you want to exit?", "exit", JOptionPane.YES_NO_OPTION);
         
         if (state == 0) {
@@ -564,41 +515,37 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miExitActionPerformed
 
     private void btnHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseEntered
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonFocused.png"));
     }//GEN-LAST:event_btnHomeMouseEntered
 
     private void btnHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMouseExited
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonNormal.png"));
         
     }//GEN-LAST:event_btnHomeMouseExited
 
     private void btnHomeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHomeMousePressed
-        // TODO add your handling code here:
+
         btnHome.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\HomeButtonPressed.png"));
     }//GEN-LAST:event_btnHomeMousePressed
 
     private void btnSettingsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingsMouseEntered
-        // TODO add your handling code here:
+
         btnSettings.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\SettingsFocused.png"));
     }//GEN-LAST:event_btnSettingsMouseEntered
 
     private void btnSettingsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingsMouseExited
-        // TODO add your handling code here:
+
         btnSettings.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\SettingsNormal.png"));
     }//GEN-LAST:event_btnSettingsMouseExited
 
     private void btnSettingsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSettingsMousePressed
-        // TODO add your handling code here:
+
         btnSettings.setIcon (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\SettingsPressed.png"));
     }//GEN-LAST:event_btnSettingsMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -620,9 +567,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EmployeeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EmployeeWindow().setVisible(true);
