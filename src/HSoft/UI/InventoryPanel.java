@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package HSoft.UI;
-
 
 import java.awt.Color;
 import java.awt.Font;
@@ -23,10 +17,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Gina
- */
 public class InventoryPanel extends javax.swing.JPanel {
     Point MouseCoordinates;
     Point MouseCoordinates2;
@@ -48,10 +38,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     String sortBy = "";
     
     int showNumRows = 0;
-    
-    /**
-     * Creates new form InventoryPanel
-     */
+   
     public InventoryPanel() {
        
         

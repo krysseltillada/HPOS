@@ -24,34 +24,7 @@ public class CreateUI extends javax.swing.JFrame {
     File getFileLocation;
     
     public CreateUI() {
-        setUndecorated(true);
-        
-        initComponents();
-        
-        imageDialog.setUndecorated(true);
-        
-        Component getEditor = spAge.getEditor().getComponent(0);
-        
-        getEditor.setBackground(new Color (35, 35, 35));
-        getEditor.setForeground (new Color (235, 235, 235));
-        
-        imageDialog.getContentPane().setBackground(new Color (35, 35, 35));
-        
-        Font roboto = new Font ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\fonts\\roboto\\Roboto-Regular.ttf", Font.PLAIN, 11);
-        
-        lblUploadMessage.setFont (roboto);
-        
-        txtfImageLocation2.setFont(roboto);
-        
-        cbUser.setEditor (new ComboBoxUI ());
-        cbUser.setEditable (true);
-       
-        setLocationRelativeTo(null);
-        
-        getContentPane().setBackground(new Color(35, 35, 35) );
-        
-        bgGender.add(rbMale);
-        bgGender.add(rbFemale);       
+        init ();
     }
 
     @SuppressWarnings("unchecked")
@@ -612,6 +585,37 @@ public class CreateUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init () {
+        setUndecorated(true);
+        
+        initComponents();
+        
+        imageDialog.setUndecorated(true);
+        
+        Component getEditor = spAge.getEditor().getComponent(0);
+        
+        getEditor.setBackground(new Color (35, 35, 35));
+        getEditor.setForeground (new Color (235, 235, 235));
+        
+        imageDialog.getContentPane().setBackground(new Color (35, 35, 35));
+        
+        Font roboto = new Font ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\fonts\\roboto\\Roboto-Regular.ttf", Font.PLAIN, 11);
+        
+        lblUploadMessage.setFont (roboto);
+        
+        txtfImageLocation2.setFont(roboto);
+        
+        cbUser.setEditor (new ComboBoxUI ());
+        cbUser.setEditable (true);
+       
+        setLocationRelativeTo(null);
+        
+        getContentPane().setBackground(new Color(35, 35, 35) );
+        
+        bgGender.add(rbMale);
+        bgGender.add(rbFemale);  
+    }
+    
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
 
         LoginUI.ifCreateWindowOpened = false;

@@ -49,7 +49,11 @@ public class LoginUI extends javax.swing.JFrame {
     String generatedCode;
     
     public LoginUI() {
-         
+        init ();
+    }
+    
+    private void init () {
+        
             if (checkSetup ()) {
                OwnerSetup ow = new OwnerSetup ();
                
@@ -80,7 +84,7 @@ public class LoginUI extends javax.swing.JFrame {
             cbUser2.setEditor (new ComboBoxUI ());
             cbUser2.setEditable(true);  
             
-            this.lblPosIcon.setIcon (  new ImageIcon ( (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\posIconWhite.png")).getImage().getScaledInstance(70, 62, Image.SCALE_DEFAULT)) );
+            lblPosIcon.setIcon (  new ImageIcon ( (new ImageIcon ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\icons\\icons\\posIconWhite.png")).getImage().getScaledInstance(70, 62, Image.SCALE_DEFAULT)) );
             
             Font roboto = new Font ("C:\\Users\\Gina\\Desktop\\cs 202 project\\POS\\src\\fonts\\roboto\\Roboto-Regular.ttf", Font.TRUETYPE_FONT, 12);
           
@@ -106,7 +110,7 @@ public class LoginUI extends javax.swing.JFrame {
     }
     
     private String insertString (String str, char []arr) {
-      
+    
         for (char c : arr) 
             str += c;
         
@@ -1899,9 +1903,7 @@ public class LoginUI extends javax.swing.JFrame {
                        } else {
                            
                            if (dbManager.hired) {
-                           
-                           System.out.println ("opening employee ");
-                               
+                        
                            currentUser = valManager.username;
                            currentTypeUser = cbUser.getSelectedItem().toString().toUpperCase();
                             
